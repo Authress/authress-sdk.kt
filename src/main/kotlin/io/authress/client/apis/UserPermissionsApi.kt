@@ -1,7 +1,6 @@
  
 package io.authress.client.apis
 
-import io.authress.client.models.PermissionObjectSlashpropertiesSlashaction
 import io.authress.client.models.PermissionResponse
 import io.authress.client.models.UserResources
 import io.authress.client.models.UserRoleCollection
@@ -18,7 +17,7 @@ class UserPermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      * @param permission Permission to check, &#x27;*&#x27; and scoped permissions can also be checked here. 
      * @return void
      */
-    fun authorizeUser(userId: kotlin.String, resourceUri: kotlin.String, permission: PermissionObjectSlashpropertiesSlashaction): Unit {
+    fun authorizeUser(userId: kotlin.String, resourceUri: kotlin.String, permission: kotlin.String): Unit {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
@@ -73,8 +72,8 @@ class UserPermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      * @return UserResources
      */
     @Suppress("UNCHECKED_CAST")
-    fun getUserResources(userId: kotlin.String, resourceUri: kotlin.String? = null, permissions: PermissionObjectSlashpropertiesSlashaction? = null, limit: kotlin.Int? = null, cursor: kotlin.String? = null): UserResources {
-        val localVariableQuery: MultiValueMap = mapOf("resourceUri" to listOf("$resourceUri"), "permissions" to listOf("$permissions"), "limit" to listOf("$limit"), "cursor" to listOf("$cursor"))
+    fun getUserResources(userId: kotlin.String, resourceUri: kotlin.String? = null, permissions: kotlin.String? = null, limit: kotlin.Int? = null, cursor: kotlin.String? = null): UserResources {
+        val localVariableQuery: Map<String, List<String>> = mapOf("resourceUri" to listOf("$resourceUri"), "permissions" to listOf("$permissions"), "limit" to listOf("$limit"), "cursor" to listOf("$cursor"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/v1/users/{userId}/resources".replace("{" + "userId" + "}", "$userId"), query = localVariableQuery

@@ -227,7 +227,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      */
     @Suppress("UNCHECKED_CAST")
     fun getRecords(limit: kotlin.Int? = null, cursor: kotlin.String? = null, filter: kotlin.String? = null, status: kotlin.String? = null): AccessRecordCollection {
-        val localVariableQuery: MultiValueMap = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"), "filter" to listOf("$filter"), "status" to listOf("$status"))
+        val localVariableQuery: Map<String, List<String>> = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"), "filter" to listOf("$filter"), "status" to listOf("$status"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/v1/records", query = localVariableQuery
@@ -279,7 +279,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      */
     @Suppress("UNCHECKED_CAST")
     fun getRequests(limit: kotlin.Int? = null, cursor: kotlin.String? = null, status: kotlin.String? = null): AccessRequestCollection {
-        val localVariableQuery: MultiValueMap = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"), "status" to listOf("$status"))
+        val localVariableQuery: Map<String, List<String>> = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"), "status" to listOf("$status"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/v1/requests", query = localVariableQuery

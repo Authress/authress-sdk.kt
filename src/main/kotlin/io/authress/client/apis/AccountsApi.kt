@@ -67,7 +67,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      */
     @Suppress("UNCHECKED_CAST")
     fun getAccounts(earliestCacheTime: java.time.LocalDateTime? = null): AccountCollection {
-        val localVariableQuery: MultiValueMap = mapOf("earliestCacheTime" to listOf("$earliestCacheTime"))
+        val localVariableQuery: Map<String, List<String>> = mapOf("earliestCacheTime" to listOf("$earliestCacheTime"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/v1/accounts", query = localVariableQuery

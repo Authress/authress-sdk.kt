@@ -44,7 +44,7 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
      */
     @Suppress("UNCHECKED_CAST")
     fun getResourceUsers(resourceUri: kotlin.String, limit: kotlin.Int? = null, cursor: kotlin.String? = null): ResourceUsersCollection {
-        val localVariableQuery: MultiValueMap = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"))
+        val localVariableQuery: Map<String, List<String>> = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/v1/resources/{resourceUri}/users".replace("{" + "resourceUri" + "}", "$resourceUri"), query = localVariableQuery

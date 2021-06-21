@@ -9,7 +9,7 @@ This is the Authress SDK used to integrate with the authorization as a service p
 ### Requires
 
 * Kotlin 1.4.30
-* Gradle 5.3
+* Gradle 7.1
 
 First, create the gradle wrapper script:
 
