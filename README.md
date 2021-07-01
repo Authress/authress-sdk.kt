@@ -4,6 +4,11 @@ This is the Authress SDK used to integrate with the authorization as a service p
 ## Usage
 The package is publish in the [Github maven repository](https://github.com/authress/authress-sdk/raw/repository) @ https://github.com/authress/authress-sdk/raw/repository
 
+```
+dependencies {
+    implementation("io.authress:authress-sdk")
+}
+```
 
 ## Contribution
 ### Requires
