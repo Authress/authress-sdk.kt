@@ -58,7 +58,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            version = ext.version
+            version = System.getenv("VERSION") != null ? System.getenv("VERSION") : '0.0.0'
             pom {
                 name = "Authress SDK"
                 description = "This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io."

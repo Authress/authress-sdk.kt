@@ -92,6 +92,7 @@ open class ApiClient(val baseUrl: String) {
 
         headers.forEach { header -> request = request.addHeader(header.key, header.value.toString()) }
 
+        request = request.addHeader("User-Agent", "Kotlin AuthressSDK version: unset")
         val realRequest = request.build()
         val response = client.newCall(realRequest).execute()
 
