@@ -2,7 +2,7 @@
 This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io.
 
 ## Usage
-
+The package is publish in the [Github maven repository](https://github.com/authress/authress-sdk/raw/repository) @ https://github.com/authress/authress-sdk/raw/repository
 
 
 ## Contribution
@@ -11,15 +11,10 @@ This is the Authress SDK used to integrate with the authorization as a service p
 * Kotlin 1.4.30
 * Gradle 7.1
 
-First, create the gradle wrapper script:
+Run
 
 ```
-gradle wrapper
-```
-
-Then, run:
-
-```
+./gradlew build
 ./gradlew check assemble
 ```
 
