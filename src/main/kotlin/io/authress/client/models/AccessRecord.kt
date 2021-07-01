@@ -4,6 +4,7 @@ package io.authress.client.models
 import io.authress.client.models.AccountLinks
 import io.authress.client.models.Statement
 import io.authress.client.models.User
+import io.authress.client.models.LinkedGroup
 
 /**
  * The access record which links users to roles.
@@ -14,6 +15,7 @@ import io.authress.client.models.User
  * @param lastUpdated The expected last time the record was updated
  * @param status Current status of the access record.
  * @param users The list of users this record applies to
+ * @param groups The list of groups this record applies to. Users in these groups will be receive access to the resources listed.
  * @param admins The list of admin that can edit this record even if they do not have global record edit permissions.
  * @param statements A list of statements which match roles to resources. Users in this record have all statements apply to them
  * @param links 
@@ -34,6 +36,8 @@ data class AccessRecord (
     val status: AccessRecord.Status? = null,
     /* The list of users this record applies to */
     val users: kotlin.Array<User>,
+    /* The list of groups this record applies to. Users in these groups will be receive access to the resources listed. */
+    val groups: kotlin.Array<LinkedGroup>? = null,
     /* The list of admin that can edit this record even if they do not have global record edit permissions. */
     val admins: kotlin.Array<User>? = null,
     /* A list of statements which match roles to resources. Users in this record have all statements apply to them */
