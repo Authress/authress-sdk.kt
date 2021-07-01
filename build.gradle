@@ -11,8 +11,7 @@ buildscript {
 
 plugins {
     id("maven-publish")
-    // kotlin("multiplatform") version "1.5.20"
-
+    id("signing")
 }
 
 group 'io.authress'
@@ -28,9 +27,11 @@ wrapper {
 }
 
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
 
 repositories {
     maven { url "https://repo1.maven.org/maven2" }
+    maven { url "https://maven.pkg.github.com" }
 }
 
 dependencies {
@@ -42,15 +43,51 @@ dependencies {
     testCompile "io.kotlintest:kotlintest:2.0.7"
 }
 
+java {
+    withJavadocJar()
+}
+
 publishing {
     repositories {
         maven {
             name = "GitHubPackages"
             url = "https://maven.pkg.github.com/authress/authress-sdk"
             credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
-  }
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'authress-sdk'
+            from components.java
+            pom {
+                name = "Authress SDK"
+                description = "This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io."
+                url = "https://github.com/Authress/authress-sdk.kt"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "authress"
+                        name = "Authress Developers"
+                        email = "developers@authress.io"
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://git@github.com:Authress/authress-sdk.kt.git"
+                    url = "https://github.com/Authress/authress-sdk.kt"
+                }
+            }
+        }
+    }
 }
+
+// signing {
+//     sign(publishing.publications["mavenJava"])
+// }
