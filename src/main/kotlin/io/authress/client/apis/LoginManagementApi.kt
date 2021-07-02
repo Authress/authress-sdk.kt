@@ -8,7 +8,7 @@ import io.authress.client.models.TenantCollection
 
 import io.authress.client.infrastructure.*
 
-class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class LoginManagementApi(val apiClient: ApiClient) {
 
     /**
      * Create a new SSO connection.
@@ -24,7 +24,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/connections"
         )
-        val response = request<Connection>(
+        val response = apiClient.request<Connection>(
                 localVariableConfig, localVariableBody
         )
 
@@ -50,7 +50,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/tenants"
         )
-        val response = request<Tenant>(
+        val response = apiClient.request<Tenant>(
                 localVariableConfig, localVariableBody
         )
 
@@ -74,7 +74,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", "$connectionId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -98,7 +98,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", "$tenantId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -123,7 +123,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", "$connectionId")
         )
-        val response = request<Connection>(
+        val response = apiClient.request<Connection>(
                 localVariableConfig
         )
 
@@ -147,7 +147,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/connections"
         )
-        val response = request<ConnectionCollection>(
+        val response = apiClient.request<ConnectionCollection>(
                 localVariableConfig
         )
 
@@ -172,7 +172,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", "$tenantId")
         )
-        val response = request<Tenant>(
+        val response = apiClient.request<Tenant>(
                 localVariableConfig
         )
 
@@ -196,7 +196,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/tenants"
         )
-        val response = request<TenantCollection>(
+        val response = apiClient.request<TenantCollection>(
                 localVariableConfig
         )
 
@@ -223,7 +223,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.PUT,
                 "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", "$connectionId")
         )
-        val response = request<Connection>(
+        val response = apiClient.request<Connection>(
                 localVariableConfig, localVariableBody
         )
 
@@ -250,7 +250,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.PUT,
                 "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", "$tenantId")
         )
-        val response = request<Tenant>(
+        val response = apiClient.request<Tenant>(
                 localVariableConfig, localVariableBody
         )
 

@@ -8,7 +8,7 @@ import io.authress.client.models.IdentityRequest
 
 import io.authress.client.infrastructure.*
 
-class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class AccountsApi(val apiClient: ApiClient) {
 
     /**
      * Get account information.
@@ -23,7 +23,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/accounts/{accountId}".replace("{" + "accountId" + "}", "$accountId")
         )
-        val response = request<Account>(
+        val response = apiClient.request<Account>(
                 localVariableConfig
         )
 
@@ -47,7 +47,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/identities"
         )
-        val response = request<IdentityCollection>(
+        val response = apiClient.request<IdentityCollection>(
                 localVariableConfig
         )
 
@@ -72,7 +72,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/accounts", query = localVariableQuery
         )
-        val response = request<AccountCollection>(
+        val response = apiClient.request<AccountCollection>(
                 localVariableConfig
         )
 
@@ -97,7 +97,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/identities"
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig, localVariableBody
         )
 

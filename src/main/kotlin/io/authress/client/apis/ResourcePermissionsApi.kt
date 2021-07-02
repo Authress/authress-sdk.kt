@@ -7,7 +7,7 @@ import io.authress.client.models.ResourceUsersCollection
 
 import io.authress.client.infrastructure.*
 
-class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class ResourcePermissionsApi(val apiClient: ApiClient) {
 
     /**
      * Get a resource permissions object.
@@ -22,7 +22,7 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
                 RequestMethod.GET,
                 "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", "$resourceUri")
         )
-        val response = request<ResourcePermission>(
+        val response = apiClient.request<ResourcePermission>(
                 localVariableConfig
         )
 
@@ -49,7 +49,7 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
                 RequestMethod.GET,
                 "/v1/resources/{resourceUri}/users".replace("{" + "resourceUri" + "}", "$resourceUri"), query = localVariableQuery
         )
-        val response = request<ResourceUsersCollection>(
+        val response = apiClient.request<ResourceUsersCollection>(
                 localVariableConfig
         )
 
@@ -73,7 +73,7 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
                 RequestMethod.GET,
                 "/v1/resources"
         )
-        val response = request<ResourcePermissionCollection>(
+        val response = apiClient.request<ResourcePermissionCollection>(
                 localVariableConfig
         )
 
@@ -99,7 +99,7 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
                 RequestMethod.PUT,
                 "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", "$resourceUri")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig, localVariableBody
         )
 

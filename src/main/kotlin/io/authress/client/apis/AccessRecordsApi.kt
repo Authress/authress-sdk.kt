@@ -13,7 +13,7 @@ import io.authress.client.models.Invite
 
 import io.authress.client.infrastructure.*
 
-class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class AccessRecordsApi(val apiClient: ApiClient) {
 
     /**
      * Claim a resource by an allowed user.
@@ -29,7 +29,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/claims"
         )
-        val response = request<ClaimResponse>(
+        val response = apiClient.request<ClaimResponse>(
                 localVariableConfig, localVariableBody
         )
 
@@ -55,7 +55,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/invites"
         )
-        val response = request<Invite>(
+        val response = apiClient.request<Invite>(
                 localVariableConfig, localVariableBody
         )
 
@@ -81,7 +81,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/records"
         )
-        val response = request<AccessRecord>(
+        val response = apiClient.request<AccessRecord>(
                 localVariableConfig, localVariableBody
         )
 
@@ -107,7 +107,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/requests"
         )
-        val response = request<AccessRequest>(
+        val response = apiClient.request<AccessRequest>(
                 localVariableConfig, localVariableBody
         )
 
@@ -131,7 +131,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", "$inviteId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -155,7 +155,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/records/{recordId}".replace("{" + "recordId" + "}", "$recordId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -179,7 +179,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/requests/{requestId}".replace("{" + "requestId" + "}", "$requestId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -204,7 +204,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/records/{recordId}".replace("{" + "recordId" + "}", "$recordId")
         )
-        val response = request<AccessRecord>(
+        val response = apiClient.request<AccessRecord>(
                 localVariableConfig
         )
 
@@ -232,7 +232,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/records", query = localVariableQuery
         )
-        val response = request<AccessRecordCollection>(
+        val response = apiClient.request<AccessRecordCollection>(
                 localVariableConfig
         )
 
@@ -257,7 +257,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/requests/{requestId}".replace("{" + "requestId" + "}", "$requestId")
         )
-        val response = request<AccessRequest>(
+        val response = apiClient.request<AccessRequest>(
                 localVariableConfig
         )
 
@@ -284,7 +284,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/requests", query = localVariableQuery
         )
-        val response = request<AccessRequestCollection>(
+        val response = apiClient.request<AccessRequestCollection>(
                 localVariableConfig
         )
 
@@ -311,7 +311,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.PATCH,
                 "/v1/requests/{requestId}".replace("{" + "requestId" + "}", "$requestId")
         )
-        val response = request<AccessRequest>(
+        val response = apiClient.request<AccessRequest>(
                 localVariableConfig, localVariableBody
         )
 
@@ -336,7 +336,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.PATCH,
                 "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", "$inviteId")
         )
-        val response = request<Account>(
+        val response = apiClient.request<Account>(
                 localVariableConfig
         )
 
@@ -365,7 +365,7 @@ class AccessRecordsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.PUT,
                 "/v1/records/{recordId}".replace("{" + "recordId" + "}", "$recordId"), headers = localVariableHeaders
         )
-        val response = request<AccessRecord>(
+        val response = apiClient.request<AccessRecord>(
                 localVariableConfig, localVariableBody
         )
 

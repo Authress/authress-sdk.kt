@@ -7,33 +7,27 @@ import io.authress.client.models.UserRoleCollection
 
 import io.authress.client.infrastructure.*
 
-class UserPermissionsApi(val apiClient: ApiClient) {
+class AuthressClient(val authressUrl: kotlin.String) {
+    val apiClient: ApiClient = ApiClient(authressUrl)
+    val records: AccessRecordsApi = AccessRecordsApi(apiClient)
+    val accounts: AccountsApi = AccountsApi(apiClient)
+    val login: LoginManagementApi = LoginManagementApi(apiClient)
+    val resources: ResourcePermissionsApi = ResourcePermissionsApi(apiClient)
+    val roles: RolesApi = RolesApi(apiClient)
+    val serviceClients: ServiceClientsApi = ServiceClientsApi(apiClient)
+    val userPermissions: UserPermissionsApi = UserPermissionsApi(apiClient)
+
+    constructor(authressUrl: kotlin.String, tokenProvider: ITokenProvider) : this(authressUrl) {
+        apiClient.tokenProvider = tokenProvider;
+    }
 
     /**
-     * Check to see if a user has permissions to a resource.
-     * Does the user have the specified permissions to the resource?
-     * @param userId The user to check permissions on 
-     * @param resourceUri The uri path of a resource to validate, must be URL encoded, uri segments are allowed, the resource must be a full path. 
-     * @param permission Permission to check, &#x27;*&#x27; and scoped permissions can also be checked here. 
+     * Set's a user token directly into this client to be used on all api calls
+     * @param token The user's JWT access token
      * @return void
      */
-    fun authorizeUser(userId: kotlin.String, resourceUri: kotlin.String, permission: kotlin.String): Unit {
-        
-        val localVariableConfig = RequestConfig(
-                RequestMethod.GET,
-                "/v1/users/{userId}/resources/{resourceUri}/permissions/{permission}".replace("{" + "userId" + "}", "$userId").replace("{" + "resourceUri" + "}", "$resourceUri").replace("{" + "permission" + "}", "$permission")
-        )
-        val response = apiClient.request<Any?>(
-                localVariableConfig
-        )
-
-        return when (response.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> TODO()
-            ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
-        }
+    fun setToken(token: kotlin.String) {
+        apiClient.tokenProvider = ConstantTokenProvider(token);
     }
     /**
      * Get the permissions a user has to a resource.

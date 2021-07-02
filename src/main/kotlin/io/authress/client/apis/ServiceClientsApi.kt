@@ -7,7 +7,7 @@ import io.authress.client.models.ClientCollection
 
 import io.authress.client.infrastructure.*
 
-class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class ServiceClientsApi(val apiClient: ApiClient) {
 
     /**
      * Create a new client.
@@ -23,7 +23,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/clients"
         )
-        val response = request<Client>(
+        val response = apiClient.request<Client>(
                 localVariableConfig, localVariableBody
         )
 
@@ -48,7 +48,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/clients/{clientId}/access-keys/{keyId}".replace("{" + "clientId" + "}", "$clientId").replace("{" + "keyId" + "}", "$keyId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -72,7 +72,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/clients/{clientId}".replace("{" + "clientId" + "}", "$clientId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -97,7 +97,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/clients/{clientId}".replace("{" + "clientId" + "}", "$clientId")
         )
-        val response = request<Client>(
+        val response = apiClient.request<Client>(
                 localVariableConfig
         )
 
@@ -121,7 +121,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/clients"
         )
-        val response = request<ClientCollection>(
+        val response = apiClient.request<ClientCollection>(
                 localVariableConfig
         )
 
@@ -146,7 +146,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/clients/{clientId}/access-keys".replace("{" + "clientId" + "}", "$clientId")
         )
-        val response = request<ClientAccessKey>(
+        val response = apiClient.request<ClientAccessKey>(
                 localVariableConfig
         )
 
@@ -173,7 +173,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.PUT,
                 "/v1/clients/{clientId}".replace("{" + "clientId" + "}", "$clientId")
         )
-        val response = request<Client>(
+        val response = apiClient.request<Client>(
                 localVariableConfig, localVariableBody
         )
 

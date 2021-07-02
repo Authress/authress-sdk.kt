@@ -46,3 +46,5 @@ jobs:
       run: gradle publish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # MAVEN_OSSRH_USERNAME: ${{ secrets.MAVEN_OSSRH_USERNAME }}
+        # MAVEN_OSSRH_TOKEN: ${{ secrets.MAVEN_OSSRH_TOKEN }}

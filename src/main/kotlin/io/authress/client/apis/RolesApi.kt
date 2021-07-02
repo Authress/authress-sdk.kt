@@ -6,7 +6,7 @@ import io.authress.client.models.RoleCollection
 
 import io.authress.client.infrastructure.*
 
-class RolesApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class RolesApi(val apiClient: ApiClient) {
 
     /**
      * Create a role.
@@ -22,7 +22,7 @@ class RolesApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/roles"
         )
-        val response = request<Role>(
+        val response = apiClient.request<Role>(
                 localVariableConfig, localVariableBody
         )
 
@@ -46,7 +46,7 @@ class RolesApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.DELETE,
                 "/v1/roles/{roleId}".replace("{" + "roleId" + "}", "$roleId")
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -71,7 +71,7 @@ class RolesApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/roles/{roleId}".replace("{" + "roleId" + "}", "$roleId")
         )
-        val response = request<Role>(
+        val response = apiClient.request<Role>(
                 localVariableConfig
         )
 
@@ -95,7 +95,7 @@ class RolesApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/roles"
         )
-        val response = request<RoleCollection>(
+        val response = apiClient.request<RoleCollection>(
                 localVariableConfig
         )
 
@@ -122,7 +122,7 @@ class RolesApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.PUT,
                 "/v1/roles/{roleId}".replace("{" + "roleId" + "}", "$roleId")
         )
-        val response = request<Role>(
+        val response = apiClient.request<Role>(
                 localVariableConfig, localVariableBody
         )
 
