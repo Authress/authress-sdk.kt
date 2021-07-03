@@ -1,6 +1,8 @@
  
 package io.authress.client.apis
 
+import java.net.URLEncoder
+
 import io.authress.client.models.Account
 import io.authress.client.models.AccountCollection
 import io.authress.client.models.IdentityCollection
@@ -8,7 +10,7 @@ import io.authress.client.models.IdentityRequest
 
 import io.authress.client.infrastructure.*
 
-class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class AccountsApi(val apiClient: ApiClient) {
 
     /**
      * Get account information.
@@ -21,9 +23,9 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/accounts/{accountId}".replace("{" + "accountId" + "}", "$accountId")
+                "/v1/accounts/{accountId}".replace("{" + "accountId" + "}", URLEncoder.encode(accountId))
         )
-        val response = request<Account>(
+        val response = apiClient.request<Account>(
                 localVariableConfig
         )
 
@@ -31,8 +33,8 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Account
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -47,7 +49,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/identities"
         )
-        val response = request<IdentityCollection>(
+        val response = apiClient.request<IdentityCollection>(
                 localVariableConfig
         )
 
@@ -55,8 +57,8 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as IdentityCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -72,7 +74,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/accounts", query = localVariableQuery
         )
-        val response = request<AccountCollection>(
+        val response = apiClient.request<AccountCollection>(
                 localVariableConfig
         )
 
@@ -80,8 +82,8 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as AccountCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -97,7 +99,7 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/identities"
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig, localVariableBody
         )
 
@@ -105,8 +107,8 @@ class AccountsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
 }

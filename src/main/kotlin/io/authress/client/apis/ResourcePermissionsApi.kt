@@ -1,13 +1,15 @@
  
 package io.authress.client.apis
 
+import java.net.URLEncoder
+
 import io.authress.client.models.ResourcePermission
 import io.authress.client.models.ResourcePermissionCollection
 import io.authress.client.models.ResourceUsersCollection
 
 import io.authress.client.infrastructure.*
 
-class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class ResourcePermissionsApi(val apiClient: ApiClient) {
 
     /**
      * Get a resource permissions object.
@@ -20,9 +22,9 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", "$resourceUri")
+                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri))
         )
-        val response = request<ResourcePermission>(
+        val response = apiClient.request<ResourcePermission>(
                 localVariableConfig
         )
 
@@ -30,8 +32,8 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
             ResponseType.Success -> (response as Success<*>).data as ResourcePermission
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -47,9 +49,9 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
         val localVariableQuery: Map<String, List<String>> = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/resources/{resourceUri}/users".replace("{" + "resourceUri" + "}", "$resourceUri"), query = localVariableQuery
+                "/v1/resources/{resourceUri}/users".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri)), query = localVariableQuery
         )
-        val response = request<ResourceUsersCollection>(
+        val response = apiClient.request<ResourceUsersCollection>(
                 localVariableConfig
         )
 
@@ -57,8 +59,8 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
             ResponseType.Success -> (response as Success<*>).data as ResourceUsersCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -73,7 +75,7 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
                 RequestMethod.GET,
                 "/v1/resources"
         )
-        val response = request<ResourcePermissionCollection>(
+        val response = apiClient.request<ResourcePermissionCollection>(
                 localVariableConfig
         )
 
@@ -81,8 +83,8 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
             ResponseType.Success -> (response as Success<*>).data as ResourcePermissionCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -97,9 +99,9 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", "$resourceUri")
+                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri))
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig, localVariableBody
         )
 
@@ -107,8 +109,8 @@ class ResourcePermissionsApi(basePath: kotlin.String = "/") : ApiClient(basePath
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
 }

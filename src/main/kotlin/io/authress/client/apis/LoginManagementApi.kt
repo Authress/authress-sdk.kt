@@ -1,6 +1,8 @@
  
 package io.authress.client.apis
 
+import java.net.URLEncoder
+
 import io.authress.client.models.Connection
 import io.authress.client.models.ConnectionCollection
 import io.authress.client.models.Tenant
@@ -8,7 +10,7 @@ import io.authress.client.models.TenantCollection
 
 import io.authress.client.infrastructure.*
 
-class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class LoginManagementApi(val apiClient: ApiClient) {
 
     /**
      * Create a new SSO connection.
@@ -24,7 +26,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/connections"
         )
-        val response = request<Connection>(
+        val response = apiClient.request<Connection>(
                 localVariableConfig, localVariableBody
         )
 
@@ -32,8 +34,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Connection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -50,7 +52,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/tenants"
         )
-        val response = request<Tenant>(
+        val response = apiClient.request<Tenant>(
                 localVariableConfig, localVariableBody
         )
 
@@ -58,8 +60,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Tenant
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -72,9 +74,9 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", "$connectionId")
+                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId))
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -82,8 +84,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -96,9 +98,9 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", "$tenantId")
+                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId))
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -106,8 +108,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -121,9 +123,9 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", "$connectionId")
+                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId})
         )
-        val response = request<Connection>(
+        val response = apiClient.request<Connection>(
                 localVariableConfig
         )
 
@@ -131,8 +133,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Connection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -147,7 +149,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/connections"
         )
-        val response = request<ConnectionCollection>(
+        val response = apiClient.request<ConnectionCollection>(
                 localVariableConfig
         )
 
@@ -155,8 +157,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as ConnectionCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -170,9 +172,9 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", "$tenantId")
+                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId))
         )
-        val response = request<Tenant>(
+        val response = apiClient.request<Tenant>(
                 localVariableConfig
         )
 
@@ -180,8 +182,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Tenant
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -196,7 +198,7 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/tenants"
         )
-        val response = request<TenantCollection>(
+        val response = apiClient.request<TenantCollection>(
                 localVariableConfig
         )
 
@@ -204,8 +206,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as TenantCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -221,9 +223,9 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", "$connectionId")
+                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId})
         )
-        val response = request<Connection>(
+        val response = apiClient.request<Connection>(
                 localVariableConfig, localVariableBody
         )
 
@@ -231,8 +233,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Connection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -248,9 +250,9 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", "$tenantId")
+                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId))
         )
-        val response = request<Tenant>(
+        val response = apiClient.request<Tenant>(
                 localVariableConfig, localVariableBody
         )
 
@@ -258,8 +260,8 @@ class LoginManagementApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Tenant
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
 }

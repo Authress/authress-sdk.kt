@@ -37,7 +37,14 @@ dependencies {
     compile "com.squareup.moshi:moshi-kotlin:1.11.0"
     compile "com.squareup.moshi:moshi-adapters:1.11.0"
     compile "com.squareup.okhttp3:okhttp:4.9.0"
-    testCompile "io.kotlintest:kotlintest:2.0.7"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.7.0"
+}
+
+sourceSets.main.java.srcDirs = ['src']
+sourceSets.test.java.srcDirs = ['test']
+
+test {
+    useJUnitPlatform()
 }
 
 java {
@@ -54,6 +61,14 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
+        // maven {
+        //     name = "OSSRH"
+        //     url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        //     credentials {
+        //         username = System.getenv("MAVEN_OSSRH_USERNAME")
+        //         password = System.getenv("MAVEN_OSSRH_TOKEN")
+        //     }
+        // }
     }
     publications {
         mavenJava(MavenPublication) {

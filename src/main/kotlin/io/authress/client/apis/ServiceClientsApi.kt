@@ -1,13 +1,15 @@
  
 package io.authress.client.apis
 
+import java.net.URLEncoder
+
 import io.authress.client.models.Client
 import io.authress.client.models.ClientAccessKey
 import io.authress.client.models.ClientCollection
 
 import io.authress.client.infrastructure.*
 
-class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
+class ServiceClientsApi(val apiClient: ApiClient) {
 
     /**
      * Create a new client.
@@ -23,7 +25,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.POST,
                 "/v1/clients"
         )
-        val response = request<Client>(
+        val response = apiClient.request<Client>(
                 localVariableConfig, localVariableBody
         )
 
@@ -31,8 +33,8 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Client
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -46,9 +48,9 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/clients/{clientId}/access-keys/{keyId}".replace("{" + "clientId" + "}", "$clientId").replace("{" + "keyId" + "}", "$keyId")
+                "/v1/clients/{clientId}/access-keys/{keyId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId)).replace("{" + "keyId" + "}", URLEncoder.encode(keyId))
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -56,8 +58,8 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -70,9 +72,9 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", "$clientId")
+                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
         )
-        val response = request<Any?>(
+        val response = apiClient.request<Any?>(
                 localVariableConfig
         )
 
@@ -80,8 +82,8 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -95,9 +97,9 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", "$clientId")
+                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
         )
-        val response = request<Client>(
+        val response = apiClient.request<Client>(
                 localVariableConfig
         )
 
@@ -105,8 +107,8 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Client
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -121,7 +123,7 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
                 RequestMethod.GET,
                 "/v1/clients"
         )
-        val response = request<ClientCollection>(
+        val response = apiClient.request<ClientCollection>(
                 localVariableConfig
         )
 
@@ -129,8 +131,8 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as ClientCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -144,9 +146,9 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.POST,
-                "/v1/clients/{clientId}/access-keys".replace("{" + "clientId" + "}", "$clientId")
+                "/v1/clients/{clientId}/access-keys".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
         )
-        val response = request<ClientAccessKey>(
+        val response = apiClient.request<ClientAccessKey>(
                 localVariableConfig
         )
 
@@ -154,8 +156,8 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as ClientAccessKey
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -171,9 +173,9 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", "$clientId")
+                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
         )
-        val response = request<Client>(
+        val response = apiClient.request<Client>(
                 localVariableConfig, localVariableBody
         )
 
@@ -181,8 +183,8 @@ class ServiceClientsApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
             ResponseType.Success -> (response as Success<*>).data as Client
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
 }

@@ -7,13 +7,16 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
+import io.authress.client.ITokenProvider
+import io.authress.client.ConstantTokenProvider
+
 open class ApiClient(val baseUrl: String) {
     companion object {
-        protected const val ContentType = "Content-Type"
-        protected const val Accept = "Accept"
-        protected const val JsonMediaType = "application/json"
-        protected const val FormDataMediaType = "multipart/form-data"
-        protected const val XmlMediaType = "application/xml"
+        internal const val ContentType = "Content-Type"
+        internal const val Accept = "Accept"
+        internal const val JsonMediaType = "application/json"
+        internal const val FormDataMediaType = "multipart/form-data"
+        internal const val XmlMediaType = "application/xml"
 
         @JvmStatic
         val client: OkHttpClient = OkHttpClient()
@@ -25,7 +28,9 @@ open class ApiClient(val baseUrl: String) {
         val jsonHeaders: Map<String, String> = mapOf(ContentType to JsonMediaType, Accept to JsonMediaType)
     }
 
-    protected inline fun <reified T> requestBody(content: T, mediaType: String = JsonMediaType): RequestBody =
+    internal var tokenProvider: ITokenProvider = ConstantTokenProvider(null)
+
+    internal inline fun <reified T> requestBody(content: T, mediaType: String = JsonMediaType): RequestBody =
             when {
                 content is File -> content.asRequestBody(mediaType.toMediaTypeOrNull())
 
@@ -45,7 +50,7 @@ open class ApiClient(val baseUrl: String) {
                 else -> TODO("requestBody currently only supports JSON body and File body.")
             }
 
-    protected inline fun <reified T : Any?> responseBody(body: ResponseBody?, mediaType: String = JsonMediaType): T? {
+    internal inline fun <reified T : Any?> responseBody(body: ResponseBody?, mediaType: String = JsonMediaType): T? {
         if (body == null) return null
         return when (mediaType) {
             JsonMediaType -> Serializer.moshi.adapter(T::class.java).fromJson(body.source())
@@ -53,11 +58,11 @@ open class ApiClient(val baseUrl: String) {
         }
     }
 
-    protected inline fun <reified T : Any?> request(requestConfig: RequestConfig, body: Any? = null): ApiInfrastructureResponse<T?> {
+    internal inline fun <reified T : Any?> request(requestConfig: RequestConfig, body: Any? = null): ApiInfrastructureResponse<T?> {
         val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
         var urlBuilder = httpUrl.newBuilder()
-                .addPathSegments(requestConfig.path.trimStart('/'))
+                .addEncodedPathSegments(requestConfig.path.trimStart('/'))
 
         requestConfig.query.forEach { query ->
             query.value.forEach { queryValue ->
@@ -93,12 +98,15 @@ open class ApiClient(val baseUrl: String) {
         headers.forEach { header -> request = request.addHeader(header.key, header.value.toString()) }
 
         request = request.addHeader("User-Agent", "Kotlin AuthressSDK version: unset")
+        val token = tokenProvider.resolveToken()
+        request = request.addHeader("Authorization", "Bearer $token")
+
         val realRequest = request.build()
         val response = client.newCall(realRequest).execute()
 
         // TODO: handle specific mapping types. e.g. Map<int, Class<?>>
         when {
-            response.isRedirect -> return Redirection(
+            response.isRedirectResponse -> return Redirection(
                     response.code,
                     response.headers.toMultimap()
             )
