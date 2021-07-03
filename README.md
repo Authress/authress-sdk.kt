@@ -2,7 +2,7 @@
 This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io.
 
 ## Getting Started
-The package is published in the [Github maven repository](https://github.com/authress/authress-sdk/raw/repository) @ https://github.com/authress/authress-sdk/raw/repository
+The package is published in the [Github maven repository](https://github.com/Authress/authress-sdk.kt/packages/879275) @ https://maven.pkg.github.com/Authress/authress-sdk.kt/
 
 ```
 dependencies {
