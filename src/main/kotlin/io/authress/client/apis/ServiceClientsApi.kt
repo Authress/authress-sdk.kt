@@ -48,7 +48,7 @@ class ServiceClientsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/clients/{clientId}/access-keys/{keyId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId)).replace("{" + "keyId" + "}", URLEncoder.encode(keyId))
+                "/v1/clients/{clientId}/access-keys/{keyId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId, "UTF-8")).replace("{" + "keyId" + "}", URLEncoder.encode(keyId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -72,7 +72,7 @@ class ServiceClientsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
+                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -97,7 +97,7 @@ class ServiceClientsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
+                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId, "UTF-8"))
         )
         val response = apiClient.request<Client>(
                 localVariableConfig
@@ -146,7 +146,7 @@ class ServiceClientsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.POST,
-                "/v1/clients/{clientId}/access-keys".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
+                "/v1/clients/{clientId}/access-keys".replace("{" + "clientId" + "}", URLEncoder.encode(clientId, "UTF-8"))
         )
         val response = apiClient.request<ClientAccessKey>(
                 localVariableConfig
@@ -173,7 +173,7 @@ class ServiceClientsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId))
+                "/v1/clients/{clientId}".replace("{" + "clientId" + "}", URLEncoder.encode(clientId, "UTF-8"))
         )
         val response = apiClient.request<Client>(
                 localVariableConfig, localVariableBody

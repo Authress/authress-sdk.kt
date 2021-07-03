@@ -23,7 +23,7 @@ class AccountsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/accounts/{accountId}".replace("{" + "accountId" + "}", URLEncoder.encode(accountId))
+                "/v1/accounts/{accountId}".replace("{" + "accountId" + "}", URLEncoder.encode(accountId, "UTF-8"))
         )
         val response = apiClient.request<Account>(
                 localVariableConfig

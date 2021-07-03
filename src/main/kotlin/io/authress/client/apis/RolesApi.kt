@@ -46,7 +46,7 @@ class RolesApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId))
+                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -71,7 +71,7 @@ class RolesApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId))
+                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId, "UTF-8"))
         )
         val response = apiClient.request<Role>(
                 localVariableConfig
@@ -122,7 +122,7 @@ class RolesApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId))
+                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId, "UTF-8"))
         )
         val response = apiClient.request<Role>(
                 localVariableConfig, localVariableBody

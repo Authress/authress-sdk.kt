@@ -131,7 +131,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", URLEncoder.encode(inviteId))
+                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", URLEncoder.encode(inviteId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -155,7 +155,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId))
+                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -179,7 +179,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId))
+                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -204,7 +204,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId))
+                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId, "UTF-8"))
         )
         val response = apiClient.request<AccessRecord>(
                 localVariableConfig
@@ -257,7 +257,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId))
+                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId, "UTF-8"))
         )
         val response = apiClient.request<AccessRequest>(
                 localVariableConfig
@@ -311,7 +311,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PATCH,
-                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId))
+                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId, "UTF-8"))
         )
         val response = apiClient.request<AccessRequest>(
                 localVariableConfig, localVariableBody
@@ -336,7 +336,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PATCH,
-                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", URLEncoder.encode(inviteId))
+                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", URLEncoder.encode(inviteId, "UTF-8"))
         )
         val response = apiClient.request<Account>(
                 localVariableConfig
@@ -365,7 +365,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         val localVariableHeaders: kotlin.collections.Map<kotlin.String, kotlin.String> = mapOf("If-Unmodified-Since" to ifUnmodifiedSince.toString())
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId)), headers = localVariableHeaders
+                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId, "UTF-8")), headers = localVariableHeaders
         )
         val response = apiClient.request<AccessRecord>(
                 localVariableConfig, localVariableBody

@@ -22,7 +22,7 @@ class ResourcePermissionsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri))
+                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri, "UTF-8"))
         )
         val response = apiClient.request<ResourcePermission>(
                 localVariableConfig
@@ -49,7 +49,7 @@ class ResourcePermissionsApi(val apiClient: ApiClient) {
         val localVariableQuery: Map<String, List<String>> = mapOf("limit" to listOf("$limit"), "cursor" to listOf("$cursor"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/resources/{resourceUri}/users".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri)), query = localVariableQuery
+                "/v1/resources/{resourceUri}/users".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri, "UTF-8")), query = localVariableQuery
         )
         val response = apiClient.request<ResourceUsersCollection>(
                 localVariableConfig
@@ -99,7 +99,7 @@ class ResourcePermissionsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri))
+                "/v1/resources/{resourceUri}".replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig, localVariableBody

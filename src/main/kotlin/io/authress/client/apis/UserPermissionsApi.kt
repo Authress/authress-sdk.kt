@@ -23,7 +23,10 @@ class UserPermissionsApi(val apiClient: ApiClient) {
 
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/users/{userId}/resources/{resourceUri}/permissions/{permission}".replace("{" + "userId" + "}", URLEncoder.encode(userId)).replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri)).replace("{" + "permission" + "}", URLEncoder.encode(permission))
+                "/v1/users/{userId}/resources/{resourceUri}/permissions/{permission}"
+                .replace("{" + "userId" + "}", URLEncoder.encode(userId, "UTF-8"))
+                .replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri, "UTF-8"))
+                .replace("{" + "permission" + "}", URLEncoder.encode(permission, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -49,7 +52,7 @@ class UserPermissionsApi(val apiClient: ApiClient) {
 
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/users/{userId}/resources/{resourceUri}/permissions".replace("{" + "userId" + "}", URLEncoder.encode(userId)).replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri))
+                "/v1/users/{userId}/resources/{resourceUri}/permissions".replace("{" + "userId" + "}", URLEncoder.encode(userId, "UTF-8")).replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri, "UTF-8"))
         )
         val response = apiClient.request<PermissionResponse>(
                 localVariableConfig
@@ -78,7 +81,7 @@ class UserPermissionsApi(val apiClient: ApiClient) {
         val localVariableQuery: Map<String, List<String>> = mapOf("resourceUri" to listOf("$resourceUri"), "permissions" to listOf("$permissions"), "limit" to listOf("$limit"), "cursor" to listOf("$cursor"))
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/users/{userId}/resources".replace("{" + "userId" + "}", URLEncoder.encode(userId)), query = localVariableQuery
+                "/v1/users/{userId}/resources".replace("{" + "userId" + "}", URLEncoder.encode(userId, "UTF-8")), query = localVariableQuery
         )
         val response = apiClient.request<UserResources>(
                 localVariableConfig
@@ -104,7 +107,7 @@ class UserPermissionsApi(val apiClient: ApiClient) {
 
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/users/{userId}/resources/{resourceUri}/roles".replace("{" + "userId" + "}", URLEncoder.encode(userId)).replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri))
+                "/v1/users/{userId}/resources/{resourceUri}/roles".replace("{" + "userId" + "}", URLEncoder.encode(userId, "UTF-8")).replace("{" + "resourceUri" + "}", URLEncoder.encode(resourceUri, "UTF-8"))
         )
         val response = apiClient.request<UserRoleCollection>(
                 localVariableConfig

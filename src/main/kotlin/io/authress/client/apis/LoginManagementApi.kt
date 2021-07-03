@@ -74,7 +74,7 @@ class LoginManagementApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId))
+                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -98,7 +98,7 @@ class LoginManagementApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId))
+                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId, "UTF-8"))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -123,7 +123,7 @@ class LoginManagementApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId})
+                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId, "UTF-8"))
         )
         val response = apiClient.request<Connection>(
                 localVariableConfig
@@ -172,7 +172,7 @@ class LoginManagementApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId))
+                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId, "UTF-8"))
         )
         val response = apiClient.request<Tenant>(
                 localVariableConfig
@@ -223,7 +223,7 @@ class LoginManagementApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId})
+                "/v1/connections/{connectionId}".replace("{" + "connectionId" + "}", URLEncoder.encode(connectionId, "UTF-8"))
         )
         val response = apiClient.request<Connection>(
                 localVariableConfig, localVariableBody
@@ -250,7 +250,7 @@ class LoginManagementApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId))
+                "/v1/tenants/{tenantId}".replace("{" + "tenantId" + "}", URLEncoder.encode(tenantId, "UTF-8"))
         )
         val response = apiClient.request<Tenant>(
                 localVariableConfig, localVariableBody
