@@ -23,7 +23,7 @@ dependencies {
 <dependency>
   <groupId>authress</groupId>
   <artifactId>authress-sdk</artifactId>
-  <version>1.0.0</version>
+  <version>[0.1.24,)</version>
 </dependency>
 ```
 
