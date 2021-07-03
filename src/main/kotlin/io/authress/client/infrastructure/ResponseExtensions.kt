@@ -10,7 +10,7 @@ val Response.isInformational: Boolean get() = this.code in 100..199
 /**
  * Provides an extension to evaluation whether the response is a 3xx code
  */
-val Response.isRedirect: Boolean get() = this.code in 300..399
+val Response.isRedirectResponse: Boolean get() = this.code in 300..399
 
 /**
  * Provides an extension to evaluation whether the response is a 4xx code

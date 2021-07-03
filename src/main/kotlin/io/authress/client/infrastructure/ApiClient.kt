@@ -7,21 +7,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-public interface ITokenProvider {
-    fun resolveToken(): kotlin.String?
-}
-
-public class ConstantTokenProvider(val token: kotlin.String?) : ITokenProvider {
-    override fun resolveToken(): kotlin.String? {
-        return token
-    }
-}
-
-public class ServiceClientTokenProvider(val token: kotlin.String?) : ITokenProvider {
-    override fun resolveToken(): kotlin.String? {
-        return token
-    }
-}
+import io.authress.client.ITokenProvider
+import io.authress.client.ConstantTokenProvider
 
 open class ApiClient(val baseUrl: String) {
     companion object {
@@ -75,7 +62,7 @@ open class ApiClient(val baseUrl: String) {
         val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
         var urlBuilder = httpUrl.newBuilder()
-                .addPathSegments(requestConfig.path.trimStart('/'))
+                .addEncodedPathSegments(requestConfig.path.trimStart('/'))
 
         requestConfig.query.forEach { query ->
             query.value.forEach { queryValue ->
@@ -113,12 +100,13 @@ open class ApiClient(val baseUrl: String) {
         request = request.addHeader("User-Agent", "Kotlin AuthressSDK version: unset")
         val token = tokenProvider.resolveToken()
         request = request.addHeader("Authorization", "Bearer $token")
+
         val realRequest = request.build()
         val response = client.newCall(realRequest).execute()
 
         // TODO: handle specific mapping types. e.g. Map<int, Class<?>>
         when {
-            response.isRedirect -> return Redirection(
+            response.isRedirectResponse -> return Redirection(
                     response.code,
                     response.headers.toMultimap()
             )

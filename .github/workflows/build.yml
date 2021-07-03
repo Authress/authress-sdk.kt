@@ -28,13 +28,12 @@ jobs:
 
     - name: Install packages
       run: gradle wrapper
-    - name: Run build
-      run: ./gradlew build
-    - name: Run tests
-      run: ./gradlew check assemble
-
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+
+    - name: Run build and test
+      run: ./gradlew build --info
+
     - name: Create Github Release and Tag
       if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.event_name == 'push'
       run: |

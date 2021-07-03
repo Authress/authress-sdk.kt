@@ -1,6 +1,8 @@
  
 package io.authress.client.apis
 
+import java.net.URLEncoder
+
 import io.authress.client.models.Role
 import io.authress.client.models.RoleCollection
 
@@ -30,8 +32,8 @@ class RolesApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as Role
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -44,7 +46,7 @@ class RolesApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", "$roleId")
+                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -54,8 +56,8 @@ class RolesApi(val apiClient: ApiClient) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -69,7 +71,7 @@ class RolesApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", "$roleId")
+                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId))
         )
         val response = apiClient.request<Role>(
                 localVariableConfig
@@ -79,8 +81,8 @@ class RolesApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as Role
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -103,8 +105,8 @@ class RolesApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as RoleCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -120,7 +122,7 @@ class RolesApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", "$roleId")
+                "/v1/roles/{roleId}".replace("{" + "roleId" + "}", URLEncoder.encode(roleId))
         )
         val response = apiClient.request<Role>(
                 localVariableConfig, localVariableBody
@@ -130,8 +132,8 @@ class RolesApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as Role
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
 }

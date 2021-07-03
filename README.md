@@ -31,7 +31,7 @@ dependencies {
 
 #### Authorize using a user token
 ```kotlin
-import io.authress.client.apis.*
+import io.authress.client.*
 
 // create an instance of the API class during service initialization
 // Replace ACCOUNT_ID with the Authress accountId
@@ -63,8 +63,7 @@ fun getResource(resourceId: kotlin.String) {
 
 #### Authorize with a service client
 ```kotlin
-import io.authress.client.apis.*
-import io.authress.client.infrastructure.*
+import io.authress.client.*
 
 // create an instance of the API class during service initialization
 // Replace AccountId with the Authress domain for your account

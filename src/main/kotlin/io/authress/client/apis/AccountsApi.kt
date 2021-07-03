@@ -1,6 +1,8 @@
  
 package io.authress.client.apis
 
+import java.net.URLEncoder
+
 import io.authress.client.models.Account
 import io.authress.client.models.AccountCollection
 import io.authress.client.models.IdentityCollection
@@ -21,7 +23,7 @@ class AccountsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/accounts/{accountId}".replace("{" + "accountId" + "}", "$accountId")
+                "/v1/accounts/{accountId}".replace("{" + "accountId" + "}", URLEncoder.encode(accountId))
         )
         val response = apiClient.request<Account>(
                 localVariableConfig
@@ -31,8 +33,8 @@ class AccountsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as Account
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -55,8 +57,8 @@ class AccountsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as IdentityCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -80,8 +82,8 @@ class AccountsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccountCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -105,8 +107,8 @@ class AccountsApi(val apiClient: ApiClient) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
 }

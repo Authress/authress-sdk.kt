@@ -1,6 +1,8 @@
  
 package io.authress.client.apis
 
+import java.net.URLEncoder
+
 import io.authress.client.models.AccessRecord
 import io.authress.client.models.AccessRecordCollection
 import io.authress.client.models.AccessRequest
@@ -37,8 +39,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as ClaimResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -63,8 +65,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as Invite
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -89,8 +91,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRecord
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -115,8 +117,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRequest
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -129,7 +131,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", "$inviteId")
+                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", URLEncoder.encode(inviteId))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -139,8 +141,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -153,7 +155,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/records/{recordId}".replace("{" + "recordId" + "}", "$recordId")
+                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -163,8 +165,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -177,7 +179,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
-                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", "$requestId")
+                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId))
         )
         val response = apiClient.request<Any?>(
                 localVariableConfig
@@ -187,8 +189,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> Unit
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -202,7 +204,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/records/{recordId}".replace("{" + "recordId" + "}", "$recordId")
+                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId))
         )
         val response = apiClient.request<AccessRecord>(
                 localVariableConfig
@@ -212,8 +214,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRecord
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -240,8 +242,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRecordCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -255,7 +257,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
-                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", "$requestId")
+                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId))
         )
         val response = apiClient.request<AccessRequest>(
                 localVariableConfig
@@ -265,8 +267,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRequest
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -292,8 +294,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRequestCollection
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -309,7 +311,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PATCH,
-                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", "$requestId")
+                "/v1/requests/{requestId}".replace("{" + "requestId" + "}", URLEncoder.encode(requestId))
         )
         val response = apiClient.request<AccessRequest>(
                 localVariableConfig, localVariableBody
@@ -319,8 +321,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRequest
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -334,7 +336,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         
         val localVariableConfig = RequestConfig(
                 RequestMethod.PATCH,
-                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", "$inviteId")
+                "/v1/invites/{inviteId}".replace("{" + "inviteId" + "}", URLEncoder.encode(inviteId))
         )
         val response = apiClient.request<Account>(
                 localVariableConfig
@@ -344,8 +346,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as Account
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
     /**
@@ -363,7 +365,7 @@ class AccessRecordsApi(val apiClient: ApiClient) {
         val localVariableHeaders: kotlin.collections.Map<kotlin.String, kotlin.String> = mapOf("If-Unmodified-Since" to ifUnmodifiedSince.toString())
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
-                "/v1/records/{recordId}".replace("{" + "recordId" + "}", "$recordId"), headers = localVariableHeaders
+                "/v1/records/{recordId}".replace("{" + "recordId" + "}", URLEncoder.encode(recordId)), headers = localVariableHeaders
         )
         val response = apiClient.request<AccessRecord>(
                 localVariableConfig, localVariableBody
@@ -373,8 +375,8 @@ class AccessRecordsApi(val apiClient: ApiClient) {
             ResponseType.Success -> (response as Success<*>).data as AccessRecord
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
-            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
-            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>))
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>))
         }
     }
 }
