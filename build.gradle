@@ -14,7 +14,7 @@ plugins {
     id("signing")
 }
 
-group 'authress'
+group 'io.authress'
 ext.version = System.getenv("VERSION") != null ? System.getenv("VERSION") : '0.0.0'
 version ext.version
 

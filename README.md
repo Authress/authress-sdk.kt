@@ -21,7 +21,7 @@ dependencies {
 </repositories>
 
 <dependency>
-  <groupId>authress</groupId>
+  <groupId>io.authress</groupId>
   <artifactId>authress-sdk</artifactId>
   <version>[0.1.24,)</version>
 </dependency>
