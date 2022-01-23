@@ -30,6 +30,7 @@ dependencies {
 ### Kotlin example
 
 #### Authorize using a user token
+
 ```kotlin
 import io.authress.client.*
 
@@ -39,7 +40,7 @@ const authressClient = AuthressClient("https://ACCOUNT_ID.api-REGION.authress.io
 
 // on api route
 // [route('/resources/<resourceId>')]
-fun getResource(resourceId: kotlin.String) {
+fun getResource(resourceId: String) {
   // Get the user token and pass it to authress
   const authorizationToken = request.headers.get('authorization')
   authressClient.setToken(authorizationToken)
@@ -75,7 +76,7 @@ const authressClient = AuthressClient("https://ACCOUNT_ID.api-REGION.authress.io
 
 // on api route
 // [route('/resources/<resourceId>')]
-fun getResource(resourceId: kotlin.String) {
+fun getResource(resourceId: String) {
   // Check Authress to authorize the user
   try {
     authressClient.userPermissions.authorizeUser(userId, "resources/$resourceId", "READ")
@@ -93,17 +94,35 @@ fun getResource(resourceId: kotlin.String) {
 }
 ```
 
+#### Verify Authress JWTs
+```kotlin
+val accessToken = "eyJhbGciOiJFZ.encodedToken.SignatureAyJhbGciOiJFZ"
+val tokenVerifier = TokenVerifier("https://YourCustomDomain")
+// Or using the accountId
+// val tokenVerifier = TokenVerifier("https://ACCOUNT_ID.login.authress.io")
+
+try {
+    tokenVerifier.verify(accessToken)
+} catch (e: ClientException) {
+    println("Invalid Token: $e")
+    throw e
+}
+```
+
 ## Contribution
 ### Requires
 
+* Java: https://openjdk.java.net/install
 * Kotlin 1.4.30
+  ` sudo snap install kotlin --classic`
 * Gradle 7.1
 
 Run
 
 ```
+gradle wrapper
 ./gradlew build
 ./gradlew check assemble
 ```
 
-This runs all tests and packages the library.
+(This runs all tests and packages the library.)

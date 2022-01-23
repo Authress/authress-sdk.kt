@@ -99,7 +99,9 @@ open class ApiClient(val baseUrl: String) {
 
         request = request.addHeader("User-Agent", "Kotlin AuthressSDK version: unset")
         val token = tokenProvider.resolveToken()
-        request = request.addHeader("Authorization", "Bearer $token")
+        if (token != null) {
+            request = request.addHeader("Authorization", "Bearer $token")
+        }
 
         val realRequest = request.build()
         val response = client.newCall(realRequest).execute()

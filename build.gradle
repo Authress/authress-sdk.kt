@@ -37,6 +37,9 @@ dependencies {
     compile "com.squareup.moshi:moshi-kotlin:1.11.0"
     compile "com.squareup.moshi:moshi-adapters:1.11.0"
     compile "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation 'org.json:json:20211205'
+    implementation 'com.google.crypto.tink:tink:1.6.1'
+    implementation 'com.nimbusds:nimbus-jose-jwt:9.15.2'
     testImplementation "org.junit.jupiter:junit-jupiter:5.7.0"
 }
 

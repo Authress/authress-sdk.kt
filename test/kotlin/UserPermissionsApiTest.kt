@@ -19,4 +19,17 @@ internal class UserPermissionsApiTest {
             throw e
         }
     }
+
+    @Test @Disabled
+    fun validator() {
+        val accessToken = "eyJhbGciOiJFZERTQSIsImtpZCI6ImdwQ3dlZmdkaXFDZUhTbmN0Z05kbWsiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2E0OGNvcGpyZjVxcmpuMW5pYWtmemZxbHAubG9naW4uYXV0aHJlc3MuaW8iLCJzdWIiOiJ1aWFxUWpjZmNNQlNTaXl3cTRwNDlnNFlRIiwiaWF0IjoxNjQyOTYyOTc1LCJleHAiOjE2NDMwNDkzNzUsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJhenAiOiJnb29nbGUiLCJjbGllbnRfaWQiOiJBVVRIUkVTU19DT05ORUNUSU9OX1RFU1QifQ.UL7jGgeBT5iWtZ0EdS0MBHgukg2VxLsa3v6Fw9hwKCF2Vq6H7TlEDkZ1bFOHAR0gEJX8ZLLPWZYph6WknbtoCQ"
+        val tokenVerifier = TokenVerifier("https://a48copjrf5qrjn1niakfzfqlp.login.authress.io")
+        
+        try {
+            tokenVerifier.verify(accessToken)
+        } catch (e: ClientException) {
+            println("Invalid Token: $e")
+            throw e
+        }
+    }
 }
