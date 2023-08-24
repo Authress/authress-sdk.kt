@@ -97,7 +97,7 @@ open class ApiClient(val baseUrl: String) {
 
         headers.forEach { header -> request = request.addHeader(header.key, header.value.toString()) }
 
-        request = request.addHeader("User-Agent", "Kotlin AuthressSDK version: unset")
+        request = request.addHeader("User-Agent", "Authress SDK; Kotlin; ;")
         val token = tokenProvider.resolveToken()
         if (token != null) {
             request = request.addHeader("Authorization", "Bearer $token")
