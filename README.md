@@ -1,4 +1,8 @@
-# Authress SDK for Kotlin and the JVM
+<p id="main" align="center">
+  <img src="https://authress.io/static/images/linkedin-banner.png" alt="Authress media banner">
+</p>
+
+# Authress SDK for Kotlin, Java, and the JVM
 This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io.
 
 ## Getting Started
