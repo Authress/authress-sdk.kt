@@ -26,6 +26,15 @@ jobs:
       with:
         java-version: 17
 
+    - name: Import GPG key
+      id: import_gpg
+      uses: crazy-max/ghaction-import-gpg@e37acbdf6e46d8be3f11008297e2964d5f68adef
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+    - name: List keys
+      run: gpg -K
+
     - name: Install packages
       run: gradle wrapper
     - name: Validate Gradle wrapper
@@ -33,6 +42,8 @@ jobs:
 
     - name: Run build and test
       run: ./gradlew build --info
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
     - name: Create Github Release and Tag
       if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.event_name == 'push'
@@ -44,5 +55,6 @@ jobs:
       if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.event_name == 'push'
       run: gradle publish
       env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         MAVEN_OSSRH_TOKEN: ${{ secrets.MAVEN_OSSRH_TOKEN }}
