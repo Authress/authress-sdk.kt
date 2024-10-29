@@ -1,52 +1,45 @@
-buildscript {
-    ext.kotlin_version = '1.4.30'
-
-    repositories {
-        maven { url "https://repo1.maven.org/maven2" }
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 plugins {
-    id("maven-publish")
-    id("signing")
+    kotlin("jvm") version "1.9.21"
+    `maven-publish`
+    signing
 }
 
-group 'io.authress'
-ext.version = System.getenv("VERSION") != null ? System.getenv("VERSION") : '0.0.0'
-version ext.version
-
-wrapper {
-    gradleVersion = '7.1'
-    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
-}
-
-apply plugin: 'kotlin'
-apply plugin: 'maven-publish'
+group = "io.authress"
+version = System.getenv("VERSION") ?: "0.0.0"
 
 repositories {
-    maven { url "https://repo1.maven.org/maven2" }
-    maven { url "https://maven.pkg.github.com" }
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com")
+    }
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    compile "com.squareup.moshi:moshi-kotlin:1.11.0"
-    compile "com.squareup.moshi:moshi-adapters:1.11.0"
-    compile "com.squareup.okhttp3:okhttp:4.9.0"
-    implementation 'org.json:json:20211205'
-    implementation 'com.google.crypto.tink:tink:1.6.1'
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.15.2'
-    testImplementation "org.junit.jupiter:junit-jupiter:5.7.0"
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+    implementation("com.squareup.moshi:moshi-adapters:1.15.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.json:json:20231013")
+    implementation("com.google.crypto.tink:tink:1.12.0")
+    implementation("com.nimbusds:nimbus-jose-jwt:9.37.3")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 }
 
-sourceSets.main.java.srcDirs = ['src']
-sourceSets.test.java.srcDirs = ['test']
+kotlin {
+    jvmToolchain(17)
+}
 
-test {
+sourceSets {
+    main {
+        java.srcDirs("src")
+    }
+    test {
+        java.srcDirs("test")
+    }
+}
+
+tasks.test {
     useJUnitPlatform()
 }
 
@@ -58,7 +51,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/Authress/authress-sdk.kt"
+            url = uri("https://maven.pkg.github.com/Authress/authress-sdk.kt")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -66,7 +59,7 @@ publishing {
         }
         maven {
             name = "OSSRH"
-            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
                 username = "WOM6P4pQ"
                 password = System.getenv("MAVEN_OSSRH_TOKEN")
@@ -74,35 +67,35 @@ publishing {
         }
     }
     publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            version = System.getenv("VERSION") != null ? System.getenv("VERSION") : '0.0.0'
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            version = System.getenv("VERSION") ?: "0.0.0"
             pom {
-                name = "Authress SDK"
-                description = "This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io."
-                url = "https://github.com/Authress/authress-sdk.kt"
+                name.set("Authress SDK")
+                description.set("This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io.")
+                url.set("https://github.com/Authress/authress-sdk.kt")
                 licenses {
                     license {
-                        name = "The Apache License, Version 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                     }
                 }
                 developers {
                     developer {
-                        id = "authress"
-                        name = "Authress Developers"
-                        email = "developers@authress.io"
+                        id.set("authress")
+                        name.set("Authress Developers")
+                        email.set("developers@authress.io")
                     }
                 }
                 scm {
-                    connection = "scm:git:git://git@github.com:Authress/authress-sdk.kt.git"
-                    url = "https://github.com/Authress/authress-sdk.kt"
+                    connection.set("scm:git:git://git@github.com:Authress/authress-sdk.kt.git")
+                    url.set("https://github.com/Authress/authress-sdk.kt")
                 }
             }
         }
     }
 }
 
-// signing {
-//     sign(publishing.publications["mavenJava"])
-// }
+signing {
+    sign(publishing.publications["mavenJava"])
+}
