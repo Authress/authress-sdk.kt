@@ -59,7 +59,7 @@ open class ApiClient(val baseUrl: String) {
     }
 
     internal inline fun <reified T : Any?> request(requestConfig: RequestConfig, body: Any? = null): ApiInfrastructureResponse<T?> {
-        val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
+        val httpUrl = baseUrl.trimEnd('/').toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
         var urlBuilder = httpUrl.newBuilder()
                 .addEncodedPathSegments(requestConfig.path.trimStart('/'))
