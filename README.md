@@ -107,7 +107,7 @@ val tokenVerifier = TokenVerifier("https://YourCustomDomain")
 
 try {
     tokenVerifier.verify(accessToken)
-} catch (e: ClientException) {
+} catch (e: TokenVerificationException) {
     println("Invalid Token: $e")
     throw e
 }

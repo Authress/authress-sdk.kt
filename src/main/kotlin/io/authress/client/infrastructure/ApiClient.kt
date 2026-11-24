@@ -10,7 +10,7 @@ import java.io.File
 import io.authress.client.ITokenProvider
 import io.authress.client.ConstantTokenProvider
 
-open class ApiClient(val baseUrl: String) {
+open class ApiClient @JvmOverloads constructor(val baseUrl: String, internal val httpClient: OkHttpClient = client) {
     companion object {
         internal const val ContentType = "Content-Type"
         internal const val Accept = "Accept"
@@ -104,7 +104,7 @@ open class ApiClient(val baseUrl: String) {
         }
 
         val realRequest = request.build()
-        val response = client.newCall(realRequest).execute()
+        val response = httpClient.newCall(realRequest).execute()
 
         // TODO: handle specific mapping types. e.g. Map<int, Class<?>>
         when {
