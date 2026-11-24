@@ -1,42 +1,17 @@
-import com.sun.net.httpserver.HttpServer
-import io.authress.client.AuthressClient
-import org.junit.jupiter.api.AfterEach
+import io.authress.client.apis.ServiceClientsApi
+import io.authress.client.infrastructure.ApiClient
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import java.net.InetSocketAddress
 
 internal class TrailingSlashApiUrlTest {
-    private lateinit var server: HttpServer
-    private val requestedPaths = mutableListOf<String>()
-
-    @BeforeEach
-    fun startServer() {
-        server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
-        server.createContext("/") { exchange ->
-            requestedPaths.add(exchange.requestURI.rawPath)
-            val body = "{}".toByteArray()
-            exchange.responseHeaders.add("Content-Type", "application/json")
-            exchange.sendResponseHeaders(200, body.size.toLong())
-            exchange.responseBody.use { it.write(body) }
-        }
-        server.start()
-    }
-
-    @AfterEach
-    fun stopServer() {
-        server.stop(0)
-    }
-
     @ParameterizedTest
     @ValueSource(strings = ["", "/", "//"])
-    fun apiUrlTrailingSlashesDoNotChangeTheRequestPath(trailingSlashes: String) {
-        val client = AuthressClient("http://127.0.0.1:${server.address.port}$trailingSlashes")
+    fun apiUrlTrailingSlashesDoNotChangeTheRequestUrl(trailingSlashes: String) {
+        val http = StubHttpClient()
 
-        runCatching { client.serviceClients.getClients() }
+        runCatching { ServiceClientsApi(ApiClient("https://authress.company.com$trailingSlashes", http.client)).getClients() }
 
-        assertEquals(listOf("/v1/clients"), requestedPaths)
+        assertEquals(listOf("https://authress.company.com/v1/clients"), http.requestedUrls)
     }
 }
